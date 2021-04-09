@@ -11,6 +11,9 @@
     <body>
         <p>
             <h:outputText value="#{sessionCounter.value}" id="helloMsgId"/>
+            <h:form>
+                <h:commandButton value="+" action="#{sessionCounter.increment}"/>
+            </h:form>
         </p>
     </body>
 </html>
