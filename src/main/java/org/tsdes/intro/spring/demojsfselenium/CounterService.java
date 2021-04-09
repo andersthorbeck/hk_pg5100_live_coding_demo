@@ -2,6 +2,7 @@ package org.tsdes.intro.spring.demojsfselenium;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 
@@ -15,6 +16,7 @@ public class CounterService {
         this.entityManager = entityManager;
     }
 
+    @Transactional
     public long createCounter() {
         CounterEntity entity = new CounterEntity();
         entity.setValue(0L);
@@ -29,6 +31,7 @@ public class CounterService {
         return entity.getValue();
     }
 
+    @Transactional
     public void incrementCounter(long id) {
         CounterEntity entity = entityManager.find(CounterEntity.class, id);
         if (entity == null) {
