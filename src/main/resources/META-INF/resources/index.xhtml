@@ -10,9 +10,10 @@
     </head>
     <body>
         <p>
-            <h:outputText value="#{sessionCounter.value}" id="helloMsgId"/>
-            <h:form>
-                <h:commandButton value="+" action="#{sessionCounter.increment}"/>
+            <h:outputText value="#{sessionCounter.value}" id="counterValue"/>
+            <h:form prependId="false">
+                <h:commandButton value="+" action="#{sessionCounter.increment}"
+                                 id="incrementButton"/>
             </h:form>
         </p>
     </body>
