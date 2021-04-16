@@ -15,38 +15,26 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 public class SeleniumTest {
 
-  private static final String COUNTER_SPAN_ID = "counterValue";
-  private static final String INCREMENT_BUTTON_ID = "incrementButton";
-
   @LocalServerPort
   private int port;
 
   @Test
   void testIncrement() throws Exception {
     WebDriver driver = SeleniumDriverHandler.getChromeDriver();
+    CounterPageObject pageObject = new CounterPageObject(driver);
 
     assertThat(port, is(greaterThan(0)));
 
     try {
       driver.get("http://localhost:" + port);
 
-      assertThat(getCounterValue(driver), is(0));
-      clickIncrementButton(driver);
-      assertThat(getCounterValue(driver), is(1));
+      assertThat(pageObject.getCounterValue(), is(0));
+      pageObject.clickIncrementButton();
+      assertThat(pageObject.getCounterValue(), is(1));
 
       Thread.sleep(5_000);
     } finally {
       driver.close();
     }
-  }
-
-  private static int getCounterValue(WebDriver driver) {
-    WebElement counterSpan = driver.findElement(By.id(COUNTER_SPAN_ID));
-    return Integer.parseInt(counterSpan.getText());
-  }
-
-  private static void clickIncrementButton(WebDriver driver) {
-    WebElement incrementButton = driver.findElement(By.id(INCREMENT_BUTTON_ID));
-    incrementButton.click();
   }
 }
