@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 
@@ -31,21 +30,23 @@ public class SeleniumTest {
     try {
       driver.get("http://localhost:" + port);
 
-      WebElement counterSpan0 = driver.findElement(By.id(COUNTER_SPAN_ID));
-      String counterValue0 = counterSpan0.getText();
-      assertThat(counterValue0, is("0"));
-      assertThat(Integer.parseInt(counterValue0), is(0));
-
-      WebElement incrementButton = driver.findElement(By.id(INCREMENT_BUTTON_ID));
-      incrementButton.click();
-
-      WebElement counterSpan1 = driver.findElement(By.id(COUNTER_SPAN_ID));
-      String counterValue1 = counterSpan1.getText();
-      assertThat(counterValue1, is("1"));
+      assertThat(getCounterValue(driver), is(0));
+      clickIncrementButton(driver);
+      assertThat(getCounterValue(driver), is(1));
 
       Thread.sleep(5_000);
     } finally {
       driver.close();
     }
+  }
+
+  private static int getCounterValue(WebDriver driver) {
+    WebElement counterSpan = driver.findElement(By.id(COUNTER_SPAN_ID));
+    return Integer.parseInt(counterSpan.getText());
+  }
+
+  private static void clickIncrementButton(WebDriver driver) {
+    WebElement incrementButton = driver.findElement(By.id(INCREMENT_BUTTON_ID));
+    incrementButton.click();
   }
 }
