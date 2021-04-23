@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class CounterEntity {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(generator = "entity_id_sequence")
     private Long id;
 
     @NotNull
