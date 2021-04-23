@@ -3,6 +3,7 @@ package org.tsdes.intro.spring.demojsfselenium;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -14,6 +15,7 @@ public class CounterEntity {
 
     @NotNull
     @Min(0)
+    @Max(10)
     private Long value;
 
     public Long getId() {
