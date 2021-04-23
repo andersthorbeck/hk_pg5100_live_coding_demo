@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import java.util.Collections;
 
 /**
  * Adapted from https://github.com/arcuri82/testing_security_development_enterprise_systems/

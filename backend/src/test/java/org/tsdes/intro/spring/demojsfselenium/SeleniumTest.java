@@ -44,7 +44,7 @@ public class SeleniumTest {
       pageObject.clickIncrementButton();
       assertThat(pageObject.getCounterValue(), is(1));
 
-      Thread.sleep(5_000);
+//      Thread.sleep(5_000);
     } finally {
       driver.close();
     }
