@@ -4,11 +4,18 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:sec="http://www.springframework.org/security/tags"
 >
     <head>
         <title>Min gøyale counter</title>
     </head>
     <body>
+
+
+    <!-- Auth parts adapted from https://github.com/arcuri82/testing_security_development_enterprise_systems/ -->
+    <sec:authenticated>
+        <p><h:outputText value="Hei innloggede bruker!"/></p>
+
         <p>
             <h:outputText value="#{sessionCounter.value}" id="counterValue"/>
             <h:form prependId="false">
@@ -16,5 +23,19 @@
                                  id="incrementButton"/>
             </h:form>
         </p>
+
+        <br/>
+
+        <form action="/logout">
+            <input value="Log out" type="submit" id="logoutBtnId"/>
+        </form>
+    </sec:authenticated>
+
+    <sec:anonymous>
+        <p>You are not logged in</p>
+        <h:button id="loginBtnId" outcome="/login.jsf" value="Log In"/>
+        <h:button id="signupBtnId" outcome="/signup.jsf" value="Sign Up"/>
+    </sec:anonymous>
+
     </body>
 </html>
