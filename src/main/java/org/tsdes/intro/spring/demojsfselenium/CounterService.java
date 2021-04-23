@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 @Service
 public class CounterService {
@@ -38,6 +39,13 @@ public class CounterService {
             throw new IllegalArgumentException("No counter found id " + id);
         }
         entity.setValue(entity.getValue() + 1);
+    }
 
+    @Transactional
+    public void resetCounter(String id) {
+        Query query = entityManager.createQuery(
+                "UPDATE CounterEntity c SET c.value = 0 WHERE c.id = " + id
+        );
+        query.executeUpdate();
     }
 }
