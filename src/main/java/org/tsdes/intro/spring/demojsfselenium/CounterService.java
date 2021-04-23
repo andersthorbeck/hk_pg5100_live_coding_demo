@@ -44,8 +44,9 @@ public class CounterService {
     @Transactional
     public void resetCounter(String id) {
         Query query = entityManager.createQuery(
-                "UPDATE CounterEntity c SET c.value = 0 WHERE c.id = " + id
+                "UPDATE CounterEntity c SET c.value = 0 WHERE c.id = :id"
         );
+        query.setParameter("id", id);
         query.executeUpdate();
     }
 }
