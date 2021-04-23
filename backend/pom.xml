@@ -63,29 +63,53 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.5</version>
 				<executions>
 					<execution>
-						<id>report-aggregate</id>
+						<id>default-prepare-agent</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-report-integration</id>
 						<phase>verify</phase>
 						<goals>
-							<goal>report-aggregate</goal>
+							<goal>report-integration</goal>
+						</goals>
+					</execution>
+					<!-- alt over kommer fra rot-pomen -->
+					<execution>
+						<id>report</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>report</goal>
 						</goals>
 					</execution>
 				</executions>
 
 			</plugin>
 
+
+			<!-- Built-in plugin used to execute unit tests -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M4</version>
 				<configuration>
 					<forkCount>1</forkCount>
 					<redirectTestOutputToFile>true</redirectTestOutputToFile>
 					<rerunFailingTestsCount>3</rerunFailingTestsCount>
-					<argLine>-Xms512m -Xmx4096m</argLine>
 				</configuration>
 			</plugin>
-
 		</plugins>
 	</build>
 
