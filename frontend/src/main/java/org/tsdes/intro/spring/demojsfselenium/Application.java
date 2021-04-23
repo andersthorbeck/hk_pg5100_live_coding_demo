@@ -13,11 +13,4 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
-	/**
-	 * Adapted from https://github.com/arcuri82/testing_security_development_enterprise_systems/
-	 */
-	@Bean
-	public PasswordEncoder passwordEncoder(){
-		return new BCryptPasswordEncoder();
-	}
 }
